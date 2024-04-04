@@ -7,10 +7,10 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { Separator } from "@/components/ui/separator";
 
 import Image from "next/image";
 import NavItems from "./NavItems";
+import { Separator } from "@/components/ui/separator";
 
 const MobileNav = () => {
   return (
