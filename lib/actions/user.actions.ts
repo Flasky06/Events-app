@@ -12,12 +12,21 @@ import { CreateUserParams, UpdateUserParams } from "@/types";
 
 export async function createUser(user: CreateUserParams) {
   try {
+    // Ensure user object is not empty and contains required fields
+    if (!user || !user.email || !user.password) {
+      throw new Error("Invalid user data. Email and password are required.");
+    }
+
     await connectToDatabase();
 
     const newUser = await User.create(user);
+
+    // Return the created user
     return JSON.parse(JSON.stringify(newUser));
   } catch (error) {
+    // Log and propagate the error for centralized handling
     handleError(error);
+    throw error;
   }
 }
 
