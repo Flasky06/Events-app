@@ -18,7 +18,7 @@ import { Input } from "@/components/ui/input";
 import { eventDefaultValues } from "@/constants";
 import Dropdown from "./Dropdown";
 import { Textarea } from "@/components/ui/textarea";
-import FileUploader from "./FileUploader";
+import { FileUploader } from "./FileUploader";
 import { set } from "mongoose";
 
 type EventFormProps = { userId: string; type: "Create" | "Update" };
