@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import {
   Select,
   SelectContent,
@@ -6,6 +7,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+
 import { ICategory } from "@/lib/database/models/category.model";
 
 type DropdownProps = {
