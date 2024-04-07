@@ -5,7 +5,7 @@ export const eventFormSchema = z.object({
   title: z.string().min(3, {
     message: "Title must be at least 2 characters.",
   }),
-  Description: z
+  description: z
     .string()
     .min(3, {
       message: "Description must be at least 2 characters.",
