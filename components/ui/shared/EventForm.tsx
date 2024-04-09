@@ -15,7 +15,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { eventFormSchema } from "@/lib/validator";
 import * as z from "zod";
-import { eventDefaultValues } from "@/constants";
 import Dropdown from "./Dropdown";
 import { Textarea } from "@/components/ui/textarea";
 import { FileUploader } from "./FileUploader";
@@ -29,6 +28,7 @@ import { useRouter } from "next/navigation";
 import { IEvent } from "@/lib/database/models/event.model";
 import { Checkbox } from "@radix-ui/react-checkbox";
 import { createEvent } from "@/lib/actions/events.actions";
+import { eventDefaultValues } from "@/constants";
 
 type EventFormProps = {
   userId: string;
@@ -39,7 +39,9 @@ type EventFormProps = {
 
 const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
   console.log(userId);
+
   const [files, setFiles] = useState<File[]>([]);
+  const initialValues = eventDefaultValues;
 
   const router = useRouter();
 
@@ -47,6 +49,7 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
 
   const form = useForm<z.infer<typeof eventFormSchema>>({
     resolver: zodResolver(eventFormSchema),
+    defaultValues: initialValues,
   });
 
   async function onSubmit(values: z.infer<typeof eventFormSchema>) {
