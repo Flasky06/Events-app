@@ -1,12 +1,13 @@
 "use server";
 import { revalidatePath } from "next/cache";
-import { CreateEventParams } from "@/types";
+import { CreateEventParams, GetAllEventsParams } from "@/types";
 import { handleError } from "../utils";
 import { connectToDatabase } from "../database";
 import Event from "../database/models/event.model";
 import User from "../database/models/user.model";
 import { HandPlatterIcon } from "lucide-react";
 import Category from "../database/models/category.model";
+import { EventEmitterAsyncResource } from "events";
 
 const populateEvent = async (query: any) => {
   return query
@@ -69,6 +70,38 @@ export const getEventsById = async (eventId: string) => {
     }
     return JSON.parse(JSON.stringify(event));
   } catch (error) {
+    handleError(error);
+  }
+};
+
+// Get all Events
+export const getAllEvents = async ({
+  query,
+  limit = 6,
+  page,
+  category,
+}: GetAllEventsParams) => {
+  try {
+    await connectToDatabase();
+
+    const conditions = {};
+
+    const eventsQuery = await Event.find(conditions)
+      .sort({ createdAt: "desc" })
+      .skip(0)
+      .limit(limit);
+
+    const events = await populateEvent(eventsQuery);
+
+    console.log(events);
+    const eventsCount = await Event.countDocuments(conditions);
+
+    return {
+      data: JSON.parse(JSON.stringify(events)),
+      totalPages: Math.ceil(eventsCount / limit),
+    };
+  } catch (error) {
+    console.log(error);
     handleError(error);
   }
 };
