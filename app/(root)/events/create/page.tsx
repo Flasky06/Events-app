@@ -5,9 +5,6 @@ const CreateEvent = async () => {
   const { sessionClaims } = auth();
 
   const userId = sessionClaims?.userId as string;
-  console.log(userId);
-
-  console.log(typeof userId);
 
   return (
     <>

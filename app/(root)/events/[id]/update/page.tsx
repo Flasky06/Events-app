@@ -1,21 +1,31 @@
 import EventForm from "@/components/ui/shared/EventForm";
+import { getEventById } from "@/lib/actions/events.actions";
 import { auth } from "@clerk/nextjs";
 import React from "react";
 
-const UpdateEvent = () => {
+type UpdateEventProps = { params: { id: string } };
+
+const UpdateEvent = async ({ params: { id } }: UpdateEventProps) => {
   const { sessionClaims } = auth();
 
   const userId = sessionClaims?.userId as string;
+
+  const event = await getEventById(id);
 
   return (
     <>
       <section className="bg-primary-50 bg-dotted-pattern bg-cover bg-center py-5 md:py-10">
         <h3 className="Wrapper h3-bold text-center sm:text-left">
-          Create Event
+          Update Event
         </h3>
       </section>
       <div className="">
-        <EventForm userId={userId} type="Update" />
+        <EventForm
+          type="Update"
+          userId={userId}
+          eventId={event._id}
+          event={event}
+        />
       </div>
     </>
   );
