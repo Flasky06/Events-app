@@ -23,7 +23,6 @@ import { useState } from "react";
 import Image from "next/image";
 import DatePicker from "react-datepicker";
 import { useUploadThing } from "@/lib/uploadthing";
-
 import "react-datepicker/dist/react-datepicker.css";
 import { useRouter } from "next/navigation";
 import { IEvent } from "@/lib/database/models/event.model";
