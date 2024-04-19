@@ -1,3 +1,4 @@
+import CheckoutButton from "@/components/ui/CheckoutButton";
 import Collection from "@/components/ui/shared/Collection";
 import {
   getEventById,
@@ -52,6 +53,7 @@ const EventDetails = async ({
               </div>
             </div>
             {/* Checkout  */}
+            <CheckoutButton event={event} />
             <div className="flex flex-col gap-5">
               <div className="flex gap-2 md:gap-3">
                 <Image
@@ -83,7 +85,6 @@ const EventDetails = async ({
                 </div>
               </div>
             </div>
-
             <div className="flex flex-col gap-2">
               <p className="p-bold-20 text-grey-600">What you'll learn :</p>
               <p className="p-medium-16 lg:p-regular-18 ">
